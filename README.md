@@ -27,3 +27,5 @@ A restaurant website where customers can make and see their reservations and sea
  - **Potential Meeting Days**: Tuesday, Wednesday, Thursday
    - Meeting in person
 
+#### How to run our application:
+ - run npm start in terminal at the root of repo. 
