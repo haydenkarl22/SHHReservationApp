@@ -34,3 +34,15 @@ A restaurant website where customers can make and see their reservations and sea
   2. cd to the frontend folder and run the command "npm install" to install all necessary frontend packages used in this project.
 
  - run npm start in terminal in the frontend folder.
+
+
+ ## Frontend Structure
+ ![FrontendDiagram](./documentation/frontendDiagram.mmd)
+
+
+ ## Backend Structure
+ ![BackendDiagram](./documentation/backendDiagram.mmd)
+
+
+ ## Overall Project Structure
+ ![OverallStructure](./documentation/overallProjectStructureDiagram.mmd)
