@@ -28,8 +28,9 @@ A restaurant website where customers can make and see their reservations and sea
    - Meeting in person
 
 #### How to run our application:
- - If this is the user's first attempt to run the application:
-       1. cd to the backend folder and run the command "pip install -r requirements.txt" to install all necessary backend packages used in this project.
-       2. cd to the frontend folder and run the command "npm install" to install all necessary frontend packages used in this project.
+
+- If this is the user's first attempt to run the application:
+  1. cd to the backend folder and run the command "pip install -r requirements.txt" to install all necessary backend packages used in this project.
+  2. cd to the frontend folder and run the command "npm install" to install all necessary frontend packages used in this project.
 
  - run npm start in terminal in the frontend folder.
