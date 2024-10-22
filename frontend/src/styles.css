@@ -1,11 +1,189 @@
-/* styles.css */
+/* src/styles.css */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.nav-list {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.nav-list li {
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  letter-spacing: 1px;
+}
+
+.nav-list a:hover {
+  color: #999;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  padding-top: 60px;
+}
+
 .page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-    color: #333;
-    background-color: #f0f0f0;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  color: #333;
+  background-color: #f0f0f0;
+}
+
+.menu-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.restaurant-name {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.menu-columns {
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+}
+
+.menu-column {
+  flex: 1;
+  max-width: 500px;
+}
+
+.menu-section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #000;
+}
+
+.section-subtitle {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.menu-item {
+  margin-bottom: 1.5rem;
+}
+
+.menu-item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.restaurant-logo {
+  max-width: 300px;
+  height: auto;
+}
+
+.about-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #000;
+}
+
+.hours-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.hours-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+}
+
+.day {
+  font-weight: bold;
+}
+
+.awards-list {
+  display: grid;
+  gap: 2rem;
+}
+
+.award-item {
+  margin-bottom: 1.5rem;
+}
+
+.award-item h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.award-source {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info {
+  line-height: 1.6;
+}
+
+.contact-info p {
+  margin-bottom: 0.5rem;
+}
