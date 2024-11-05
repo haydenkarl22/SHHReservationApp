@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Booking from './pages/Booking';
@@ -33,6 +33,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
+
+
     </Router>
   );
 }
