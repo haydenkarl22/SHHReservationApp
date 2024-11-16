@@ -9,6 +9,10 @@ const Profile = () => {
     const user = auth.currentUser;
     const navigate = useNavigate();
 
+    const handleLoginClick = async (e) => {
+        navigate('/login');
+    };
+
     useEffect(() => {
         if (user) {
             const fetchUserData = async () => {
@@ -47,7 +51,14 @@ const Profile = () => {
     };
 
     if (!user) {
-        return <p>No user logged in</p>;
+        return (
+        <div>
+            <p>No user logged in</p>
+            <button onClick={handleLoginClick} style={{ marginLeft: '10px' }}>
+                Login
+            </button>
+        </div>
+        );
     }
 
     return (
