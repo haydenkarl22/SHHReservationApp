@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -7,23 +6,14 @@ import Booking from './pages/Booking';
 import Menu from './pages/Menu';
 import About from './pages/About';
 import Signup from './pages/Signup';
-
+import Header from './components/Header'; 
 import './styles.css';
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/booking">Booking</Link></li>
-            <li><Link to="/menu">Menu</Link></li>
-            <li><Link to="/about">About</Link></li>
-          </ul>
-        </nav>
-
+        <Header /> {}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -33,8 +23,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
-
-
     </Router>
   );
 }

@@ -1,189 +1,124 @@
-/* src/styles.css */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 10px 0;
-}
-
-.nav-list {
-  height: 100%;
+/* General Reset */
+body, html {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Merriweather', serif; /* Elegant serif font */
+  color: #333;
+  background-color: #fffaf0; /* Warm beige tone */
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #8B0000; /* Deep red */
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 4rem;
-}
-
-.nav-list li {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-.nav-list a {
+nav li {
+  margin: 0 1rem;
+}
+
+nav a {
+  color: white;
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.2s ease;
-  letter-spacing: 1px;
+  font-size: 1.2rem;
+  transition: color 0.3s;
 }
 
-.nav-list a:hover {
-  color: #999;
+nav a:hover {
+  color: #f4a261; /* Light gold tone */
 }
 
-.page-wrapper {
-  min-height: 100vh;
-  padding-top: 60px;
+/* Header */
+header {
+  text-align: center;
+  background-image: url('img/italian-kitchen.jpg'); /* Replace with an Italian kitchen image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 5rem 1rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 60px);
-  font-family: Arial, sans-serif;
-  font-size: 24px;
-  color: #333;
-  background-color: #f0f0f0;
+header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px #000;
 }
 
-.menu-container {
+header p {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Main Content */
+main {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #fff;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
-.restaurant-name {
-  text-align: center;
-  font-size: 2.5rem;
+section {
   margin-bottom: 2rem;
-}
-
-.menu-columns {
-  display: flex;
-  gap: 4rem;
-  justify-content: space-between;
-}
-
-.menu-column {
-  flex: 1;
-  max-width: 500px;
-}
-
-.menu-section {
-  margin-bottom: 3rem;
-}
-
-.section-header {
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #000;
-}
-
-.section-subtitle {
-  font-style: italic;
-  color: #666;
-  margin-bottom: 1.5rem;
-}
-
-.menu-item {
-  margin-bottom: 1.5rem;
-}
-
-.menu-item h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.menu-item p {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
-}
-
-.price {
-  font-weight: bold;
-}
-
-.about-container {
-  max-width: 1000px;
-  margin: 0 auto;
   padding: 2rem;
+  border: 2px solid #8B0000;
+  border-radius: 5px;
   background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.logo-container {
+h2 {
+  color: #8B0000;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif; /* Another elegant font */
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
   text-align: center;
-  margin-bottom: 3rem;
+  padding: 1rem 0;
+  font-size: 0.9rem;
 }
 
-.restaurant-logo {
-  max-width: 300px;
-  height: auto;
+/* Buttons */
+button {
+  background-color: #8B0000;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.about-section {
-  margin-bottom: 3rem;
+button:hover {
+  background-color: #f4a261;
 }
 
-.section-title {
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #000;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav ul {
+      flex-direction: column;
+  }
 
-.hours-grid {
-  display: grid;
-  gap: 0.5rem;
-}
+  header h1 {
+      font-size: 2rem;
+  }
 
-.hours-row {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  align-items: center;
-}
-
-.day {
-  font-weight: bold;
-}
-
-.awards-list {
-  display: grid;
-  gap: 2rem;
-}
-
-.award-item {
-  margin-bottom: 1.5rem;
-}
-
-.award-item h3 {
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.award-source {
-  font-style: italic;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-.contact-info {
-  line-height: 1.6;
-}
-
-.contact-info p {
-  margin-bottom: 0.5rem;
+  header p {
+      font-size: 1rem;
+  }
 }
