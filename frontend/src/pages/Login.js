@@ -1,35 +1,37 @@
 // src/pages/Login.js
 import React, { useState } from 'react';
-import { auth } from '../firebase'; // Import your Firebase config
+import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            console.log("Login successful:", userCredential.user);
-            navigate('/profile'); 
+            setMessage('you have been logged in');
+            setTimeout(() => {
+                navigate('/profile');
+            }, 2000);
         } catch (error) {
             console.error("Login error:", error);
-            alert("Login failed: " + error.message);
+            setMessage('error: user does not exist');
         }
     };
 
     const handleSignupClick = () => {
-        navigate('/signup'); // Navigate to signup page
+        navigate('/signup');
     };
 
     return (
         <>
-            <div class="flex-container">
+            <div className="flex-container">
                 <h1>LOGIN</h1>
                 <form onSubmit={handleLogin}>
                     <div>
@@ -56,9 +58,10 @@ function Login() {
                     </div>
                     <button type="submit">Login</button>
                 </form>
+                {message && <p>{message}</p>}
             </div>
 
-            <div class="flex-container"> 
+            <div className="flex-container"> 
                 <div>
                     <label htmlFor="signupq">Don't have an account?</label>
                     <button onClick={handleSignupClick} style={{ marginLeft: '10px' }}>
