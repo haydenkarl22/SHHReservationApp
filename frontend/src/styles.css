@@ -3,16 +3,22 @@ body, html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Merriweather', serif; /* Elegant serif font */
+  font-family: 'Merriweather', serif;
   color: #333;
-  background-color: #fffaf0; /* Warm beige tone */
+  background-color: #fffaf0;
+  background-image: url('img/background.png'); /* Replace with your actual background image */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 /* Navigation Bar */
 nav {
-  background-color: #8B0000; /* Deep red */
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #008000 33.33%, #ffffff 33.33%, #ffffff 66.66%, #ff0000 66.66%);
   color: white;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -22,6 +28,7 @@ nav ul {
   justify-content: center;
   margin: 0;
   padding: 0;
+  flex: 1;
 }
 
 nav li {
@@ -29,20 +36,21 @@ nav li {
 }
 
 nav a {
-  color: white;
+  color: black;
   text-decoration: none;
   font-size: 1.2rem;
+  font-weight: bold;
   transition: color 0.3s;
 }
 
 nav a:hover {
-  color: #f4a261; /* Light gold tone */
+  color: #f4a261;
 }
 
 /* Header */
 header {
   text-align: center;
-  background-image: url('img/italian-kitchen.jpg'); /* Replace with an Italian kitchen image */
+  background-image: url('img/italian-kitchen.jpg'); /* Header-specific background image */
   background-size: cover;
   background-position: center;
   color: white;
@@ -61,6 +69,15 @@ header p {
   margin-top: 1rem;
 }
 
+.logo-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.restaurant-logo {
+  height: 80px;
+}
+
 /* Main Content */
 main {
   max-width: 1200px;
@@ -71,21 +88,22 @@ main {
 section {
   margin-bottom: 2rem;
   padding: 2rem;
-  border: 2px solid #8B0000;
+  border: 2px solid #8B0000; /* Red border */
   border-radius: 5px;
-  background-color: #fff;
+  background-color: rgba(255, 250, 240, 0.8); /* Transparent warm beige */
+  backdrop-filter: blur(10px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   color: #8B0000;
   margin-bottom: 1rem;
-  font-family: 'Playfair Display', serif; /* Another elegant font */
+  font-family: 'Playfair Display', serif;
 }
 
 /* Footer */
 footer {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent black */
   color: white;
   text-align: center;
   padding: 1rem 0;
@@ -110,15 +128,20 @@ button:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
   nav ul {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   header h1 {
-      font-size: 2rem;
+    font-size: 2rem;
   }
 
   header p {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 }
