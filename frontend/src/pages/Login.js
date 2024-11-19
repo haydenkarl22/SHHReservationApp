@@ -7,16 +7,16 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate(); // Initialize useNavigate
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, username, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log("Login successful:", userCredential.user);
-            navigate('/home'); 
+            navigate('/profile'); 
         } catch (error) {
             console.error("Login error:", error);
             alert("Login failed: " + error.message);
@@ -29,17 +29,17 @@ function Login() {
 
     return (
         <>
-            <div className="page-container" style={{ width: '100%', height: '25%' }}>
+            <div class="flex-container">
                 <h1>LOGIN</h1>
                 <form onSubmit={handleLogin}>
                     <div>
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="email">Email:</label>
                         <input 
-                            type="text" 
-                            id="username" 
-                            name="username" 
-                            value={username} 
-                            onChange={(e) => setUsername(e.target.value)} 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
                             required 
                         />
                     </div>
@@ -58,7 +58,7 @@ function Login() {
                 </form>
             </div>
 
-            <div className="page-container" style={{ width: '100%', height: '25%' }}> 
+            <div class="flex-container"> 
                 <div>
                     <label htmlFor="signupq">Don't have an account?</label>
                     <button onClick={handleSignupClick} style={{ marginLeft: '10px' }}>
