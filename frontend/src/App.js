@@ -1,11 +1,12 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Booking from './pages/Booking';
 import Menu from './pages/Menu';
 import About from './pages/About';
+import Jobs from './pages/Jobs';
 import Signup from './pages/Signup';
 
 import './styles.css';
@@ -21,6 +22,7 @@ function App() {
             <li><Link to="/booking">Booking</Link></li>
             <li><Link to="/menu">Menu</Link></li>
             <li><Link to="/about">About</Link></li>
+            <li><Link to ="/jobs">Jobs</Link></li>
           </ul>
         </nav>
 
@@ -30,6 +32,7 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/about" element={<About />} />
+          <Route path="/jobs" element = {<Jobs />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
