@@ -54,20 +54,7 @@
   color: #333;
   background-color: #f0f0f0;
 }
-.wait-time-info {
-  text-align: center;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
-}
 
-.wait-time-info h2 {
-  font-size: 1.5rem;
-  color: #333;
-  margin: 0;
-}
 .menu-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -201,7 +188,6 @@
   margin-bottom: 0.5rem;
 }
 /*Job application page*/
-/* Jobs page container */
 .jobs-page {
   padding: 2rem;
   max-width: 1200px;
@@ -216,7 +202,7 @@
   padding: 2rem;
 }
 
-/* Content sections */
+
 .jobs-content {
   display: grid;
   gap: 2rem;
@@ -327,7 +313,7 @@
   border: 1px solid #feb2b2;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 767px) {
   .jobs-page {
     padding: 1rem;
