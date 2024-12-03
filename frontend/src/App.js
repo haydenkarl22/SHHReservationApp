@@ -1,6 +1,7 @@
 // src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { React, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Booking from './pages/Booking';
@@ -8,24 +9,23 @@ import Menu from './pages/Menu';
 import About from './pages/About';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-
 import './styles.css';
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [pathname]); // Triggered on pathname change
+
+  return null; // This component does not render anything
+};
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/booking">Booking</Link></li>
-            <li><Link to="/menu">Menu</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
-          </ul>
-        </nav>
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -36,7 +36,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
-
 
     </Router>
   );

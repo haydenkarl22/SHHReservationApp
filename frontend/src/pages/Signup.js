@@ -1,9 +1,9 @@
-// src/pages/Signup.js
 import React, { useState } from 'react';
 import { db, auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from "firebase/firestore";
 import '../styles.css';
+import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 
 function Signup() {
@@ -17,44 +17,67 @@ function Signup() {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log("User created in Firebase Auth:", user);
+
             await addDoc(collection(db, 'users'), {
                 uid: user.uid,
                 email, 
                 username
             });
             console.log('User added to Firestore with ID:', user.uid);
+
             navigate('/profile');
-        } 
-        catch (error) {
+        } catch (error) {
             console.error('Error adding user to Firebase:', error);
         }
     };
 
     return (
-        <div className="page-container">
-                <h1>SIGN UP</h1>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input 
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button onClick={handleSignup}>Sign Up</button>
+        <div className="page-wrapper">
+            <Header />
+            <div className="page-container">
+                <div className="profile-container">
+                    <h1 className="profile-name">Sign Up</h1>
+                    <form onSubmit={(e) => { e.preventDefault(); handleSignup(); }} className="profile-section">
+                        <div className="profile-item">
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="profile-item">
+                            <label htmlFor="username">Username:</label>
+                            <input 
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enter your username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="profile-item">
+                            <label htmlFor="password">Password:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="profile-item">Sign Up</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
