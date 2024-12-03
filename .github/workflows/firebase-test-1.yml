@@ -21,6 +21,9 @@ jobs:
       with:
         node-version: '18'
 
+    - name: Nav to frontend
+      run: cd frontend
+
     - name: Install dependencies
       run: npm install
 
