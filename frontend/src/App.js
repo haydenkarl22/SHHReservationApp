@@ -8,6 +8,7 @@ import Menu from './pages/Menu';
 import About from './pages/About';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Jobs from './pages/Jobs';
 import Header from './components/Header'
 
 import './styles.css';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/jobs" element = {<Jobs />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>

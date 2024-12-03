@@ -12,6 +12,7 @@ function Header() {
           <li><Link to="/booking">BOOKING</Link></li>
           <li><Link to="/menu">MENU</Link></li>
           <li><Link to="/about">ABOUT</Link></li>
+          <li><Link to="/jobs">JOBS</Link></li>
         </ul>
       </nav>
     </header>
