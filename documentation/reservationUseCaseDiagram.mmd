@@ -1,0 +1,19 @@
+flowchart TD
+    A[User wants to make a reservation] --> B{Do they have an account?}
+    B -->|Yes| C[Log in]
+    B -->|No| D[Create an Account]
+
+    C --> E{Do they have a reservation?}
+    D --> E
+
+    E -->|Yes| F[Check Reservation]
+    E -->|No| G[Create New Reservation]
+
+    F --> H{Delete reservation?}
+    H -->|Yes| I[Delete Reservation]
+    H -->|No| J[Reservation Stays]
+
+    G --> K[Fill in Reservation Form]
+    I --> N[Confirmation Page]
+    K --> M[Submit Reservation]
+    M --> N[Confirmation Page]

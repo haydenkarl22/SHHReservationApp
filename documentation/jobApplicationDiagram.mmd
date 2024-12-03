@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Firebase
+
+    User ->> Frontend: Open Job Application Page
+    Frontend ->> User: Display Job Application
+    User ->> Frontend: Insert Name, Number, Email, Position, and Notes
+    Frontend ->> Backend: Send Job Application
+    Backend ->> Firebase: Save Job Application
+    Firebase -->> Backend: Confirm Save
+    Backend -->> Frontend: Respond with Confirmation
+    Frontend -->> User: Show Successful Submit
