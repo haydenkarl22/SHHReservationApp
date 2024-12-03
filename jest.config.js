@@ -7,5 +7,8 @@ module.exports = {
     },
     testMatch: ['<rootDir>/src/tests/**/*.js'],
     collectCoverage: true,
-    coverageDirectory: 'coverage'
+    coverageDirectory: 'coverage',
+    transform: {
+      '^.+\\.(js|jsx)$': 'babel-jest',
+    },
   };
