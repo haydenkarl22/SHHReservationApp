@@ -14,10 +14,16 @@ import {
 } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
-const Calendar = ({ reservedTimes, onDateSelect, selectedDate, availableTimes }) => {
+const Calendar = ({ reservedTimes, onDateSelect, selectedDate, availableTimes, fetchReservedTimes }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [timeDialogOpen, setTimeDialogOpen] = useState(false);
   const [selectedDayTimes, setSelectedDayTimes] = useState([]);
+
+  const isDateInPast = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  }; 
   
   const getDaysInMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -28,23 +34,32 @@ const Calendar = ({ reservedTimes, onDateSelect, selectedDate, availableTimes })
   };
 
   const handlePreviousMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+    const newDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1);
+    const today = new Date();
+    if (newDate.getMonth() >= today.getMonth() || newDate.getFullYear() > today.getFullYear()) {
+      setCurrentMonth(newDate);
+    }
   };
 
   const handleNextMonth = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
   };
 
-  const handleDayClick = (day) => {
+  const handleDayClick = async (day) => {
     const selectedDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    if (isDateInPast(selectedDay)) {
+      return;
+    }
+    
     onDateSelect(selectedDay);
     
-    // Get time slots for the selected day
     const dateStr = selectedDay.toISOString().split('T')[0];
+    const bookings = await fetchReservedTimes(selectedDay);
+    
     const dayTimes = availableTimes.map(time => ({
       time,
-      isBooked: reservedTimes[dateStr]?.includes(time),
-      bookedBy: reservedTimes[dateStr]?.find(booking => booking.time === time)?.lastName || ''
+      isBooked: bookings.some(booking => booking.time === time),
+      bookedBy: bookings.find(booking => booking.time === time)?.lastName || ''
     }));
     
     setSelectedDayTimes(dayTimes);
@@ -56,33 +71,33 @@ const Calendar = ({ reservedTimes, onDateSelect, selectedDate, availableTimes })
     const daysInMonth = getDaysInMonth(currentMonth);
     const firstDay = getFirstDayOfMonth(currentMonth);
 
-    // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       days.push(<Box key={`empty-${i}`} sx={{ p: 2 }} />);
     }
 
-    // Add cells for each day of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
       const dateStr = date.toISOString().split('T')[0];
       const hasBookings = reservedTimes[dateStr]?.length > 0;
+      const isPast = isDateInPast(date);
 
       days.push(
         <Box
           key={day}
-          onClick={() => handleDayClick(day)}
+          onClick={() => !isPast && handleDayClick(day)}
           sx={{
             p: 2,
             border: '1px solid #ddd',
-            cursor: 'pointer',
-            backgroundColor: hasBookings ? '#fff3e0' : 'white',
+            cursor: isPast ? 'not-allowed' : 'pointer',
+            backgroundColor: isPast ? '#f5f5f5' : hasBookings ? '#fff3e0' : 'white',
+            color: isPast ? '#999' : 'inherit',
             '&:hover': {
-              backgroundColor: '#f5f5f5'
+              backgroundColor: isPast ? '#f5f5f5' : '#f0f0f0'
             }
           }}
         >
           <Typography>{day}</Typography>
-          {hasBookings && (
+          {hasBookings && !isPast && (
             <Typography variant="caption" color="text.secondary">
               Has bookings
             </Typography>

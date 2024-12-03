@@ -165,7 +165,11 @@ const Calendar = ({ reservedTimes, onDateSelect, selectedDate, availableTimes })
 
 function Booking() {
   const [user, loading] = useAuthState(auth);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return today;
+  });
   const [selectedTime, setSelectedTime] = useState("");
   const [reservedTimes, setReservedTimes] = useState({});
   const [formData, setFormData] = useState({
@@ -178,6 +182,7 @@ function Booking() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchReservedTimes = async () => {
@@ -216,6 +221,12 @@ function Booking() {
     }
   }, [user]);
 
+  const isDateInPast = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -225,6 +236,10 @@ function Booking() {
   };
 
   const validateBooking = () => {
+    if (isDateInPast(selectedDate)) {
+      setError("Cannot make reservations for past dates");
+      return false;
+    }
     if (!selectedTime) {
       setError("Please select a time slot");
       return false;
@@ -238,6 +253,39 @@ function Booking() {
       return false;
     }
     return true;
+  };
+
+  const handleDateSelect = (date) => {
+    if (isDateInPast(date)) {
+      setError("Cannot select past dates");
+      return;
+    }
+    setSelectedDate(date);
+    setError(""); 
+  };
+
+  const fetchReservedTimesForDate = async (date) => {
+    const dateStr = date.toISOString().split('T')[0];
+    const bookingsRef = collection(db, 'bookings');
+    const q = query(bookingsRef, where("date", "==", dateStr));
+    
+    try {
+      const querySnapshot = await getDocs(q);
+      const bookings = querySnapshot.docs.map(doc => ({
+        time: doc.data().time,
+        lastName: doc.data().name.split(' ').pop()
+      }));
+      
+      setReservedTimes(prev => ({
+        ...prev,
+        [dateStr]: bookings
+      }));
+      
+      return bookings; 
+    } catch (err) {
+      console.error("Error fetching reservations:", err);
+      return [];
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -318,9 +366,10 @@ function Booking() {
           <>
             <Calendar
               reservedTimes={reservedTimes}
-              onDateSelect={setSelectedDate}
+              onDateSelect={handleDateSelect}
               selectedDate={selectedDate}
               availableTimes={AVAILABLE_TIMES}
+              fetchReservedTimes={fetchReservedTimesForDate}
             />
             
             <Grid container spacing={4}>

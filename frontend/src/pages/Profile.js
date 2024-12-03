@@ -70,10 +70,7 @@ const Profile = () => {
                         <br />
 
                     </div>
-                    <h1 className="profile-name">Reservations</h1>
-                    <div className="profile-section">
-                        <p className="profile-item">No reservations found.</p>
-                    </div> 
+                     
                     <br />
                     <br />
                     <br />
