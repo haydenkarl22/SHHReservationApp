@@ -1,9 +1,12 @@
-const { initializeApp, applicationDefault } = require('firebase-admin/app');
+const { initializeApp, cert } = require('firebase-admin/app');
 const { getAuth } = require('firebase-admin/auth');
+const path = require('path');
 
-// Initialize Firebase Admin SDK with default credentials
+const serviceAccountPath = path.resolve(__dirname, '../../sshreservationapp-3300.json');
+
+// Initialize Firebase Admin SDK
 initializeApp({
-  credential: applicationDefault(),
+  credential: cert(require(serviceAccountPath)),
   projectId: 'sshreservationapp-3300',
 });
 
