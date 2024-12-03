@@ -1,0 +1,42 @@
+name: Reservation Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Run user creation test
+      run: node frontend/src/tests/createUserTest.js
+
+    - name: Run user deletion test
+      run: node frontend/src/tests/deleteUserTest.js
+
+    - name: Run Booking Test
+      run: node frontend/src/tests/bookingTest.js  
+
+    - name: Run Job Submit Test
+      run: node frontend/src/tests/jobTest.js
+
+    - name: Run Header Test
+      run: node frontend/src/tests/headerTest.js
