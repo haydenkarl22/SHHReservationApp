@@ -1,6 +1,7 @@
 // src/App.js
-import React from 'react';
+import { React, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Booking from './pages/Booking';
@@ -13,9 +14,23 @@ import Header from './components/Header'
 
 import './styles.css';
 
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [pathname]); // Triggered on pathname change
+
+  return null; // This component does not render anything
+};
+
+
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div>
         <Header /> {}
 
