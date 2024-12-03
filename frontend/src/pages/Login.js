@@ -20,8 +20,7 @@ function Login() {
                 navigate('/profile');
             }, 2000);
         } catch (error) {
-            console.error("Login error:", error);
-            setMessage('error: user does not exist');
+            alert("User does not exist");
         }
     };
 
