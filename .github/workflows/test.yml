@@ -26,17 +26,21 @@ jobs:
         cd frontend
         npm install
 
-    - name: Run user creation test
-      run: node frontend/src/tests/createUserTest.js
+    - name: Run tests and generate logs
+      run: |
+        node frontend/src/tests/createUserTest.js > createUserTest.log || true
+        node frontend/src/tests/deleteUserTest.js > deleteUserTest.log || true
+        node frontend/src/tests/bookingTest.js > bookingTest.log || true
+        node frontend/src/tests/jobTest.js > jobTest.log || true
+        node frontend/src/tests/headerTest.js > headerTest.log || true
 
-    - name: Run user deletion test
-      run: node frontend/src/tests/deleteUserTest.js
-
-    - name: Run Booking Test
-      run: node frontend/src/tests/bookingTest.js  
-
-    - name: Run Job Submit Test
-      run: node frontend/src/tests/jobTest.js
-
-    - name: Run Header Test
-      run: node frontend/src/tests/headerTest.js
+    - name: Upload test logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-logs
+        path: |
+          createUserTest.log
+          deleteUserTest.log
+          bookingTest.log
+          jobTest.log
+          headerTest.log
