@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import '../styles.css';
 import { db, auth } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css';
 
 const Profile = () => {
     const [username, setUsername] = useState('');
     const user = auth.currentUser;
     const navigate = useNavigate();
 
-    const handleLoginClick = async (e) => {
-        navigate('/login');
-    };
 
     useEffect(() => {
         if (user) {
@@ -19,7 +16,6 @@ const Profile = () => {
                 try {
                     const usersCollectionRef = collection(db, 'users');
                     const q = query(usersCollectionRef, where('uid', '==', user.uid));
-
                     const querySnapshot = await getDocs(q);
 
                     if (!querySnapshot.empty) {
@@ -50,29 +46,45 @@ const Profile = () => {
         }
     };
 
-    if (!user) {
-        return (
-        <div>
-            <p>No user logged in</p>
-            <button onClick={handleLoginClick} style={{ marginLeft: '10px' }}>
-                Login
-            </button>
-        </div>
-        );
+    const deleteAccount = async () => {
+        try {
+            alert('Are you sure you want to delete your account?');
+            await user.delete();
+            navigate('/login');
+        } catch (error) {
+            console.error('Error deleting user:', error);
+        }
     }
 
     return (
-        <>
-            <div>
-                <h2>Welcome, {username} <button onClick={handleLogout}>Logout</button> </h2>
-                <p>Email: {user.email}</p>
-                <p>Username: {username || 'N/A'}</p>
+        <div className="page-wrapper">
+            <div className="page-container">
+                <div className="profile-container">
+                    <h1 className="profile-name">Profile</h1>
+                    <div className="profile-section">
+                        <p className="profile-item"><strong>Username:</strong> {username}</p>
+                        <p className="profile-item"><strong>Email:</strong> {user.email}</p>
+                        <button onClick={handleLogout} className='profile-item'>
+                            Logout
+                        </button>
+                        <br />
+
+                    </div>
+                    <h1 className="profile-name">Reservations</h1>
+                    <div className="profile-section">
+                        <p className="profile-item">No reservations found.</p>
+                    </div> 
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <button onClick={deleteAccount}>
+                            Delete Account
+                    </button>
+                </div>  
             </div>
-            <div>
-                <h2>Reservations</h2>
-                <p>*SET FUNCTIONALITY WHEN RESERVATIONS EXIST*</p>
-            </div>
-        </>
+        </div>
     );
 };
 

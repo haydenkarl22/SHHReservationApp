@@ -1,7 +1,20 @@
 // src/components/Header.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../firebase';
 import '../styles.css';
+
+
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const cleanup = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(!!user);
+    });
+    return () => cleanup();
+  }, []);
+
+
 
 function Header() {
   return (
@@ -13,6 +26,11 @@ function Header() {
           <li><Link to="/menu">MENU</Link></li>
           <li><Link to="/about">ABOUT</Link></li>
           <li><Link to="/jobs">JOBS</Link></li>
+          {isLoggedIn ? (
+            <li><Link to="/profile">PROFILE</Link></li>
+          ) : (
+            <li><Link to="/login">LOGIN</Link></li>
+          )}
         </ul>
       </nav>
     </header>

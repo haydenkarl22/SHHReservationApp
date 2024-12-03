@@ -30,46 +30,48 @@ function Login() {
     };
 
     return (
-        <>
-            <div className="flex-container">
-                <h1>LOGIN</h1>
-                <form onSubmit={handleLogin}>
-                    <div>
-                        <label htmlFor="email">Email:</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password:</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
-                        />
-                    </div>
-                    <button type="submit">Login</button>
-                </form>
-                {message && <p>{message}</p>}
-            </div>
+        <div className="page-wrapper">
 
-            <div className="flex-container"> 
-                <div>
-                    <label htmlFor="signupq">Don't have an account?</label>
-                    <button onClick={handleSignupClick} style={{ marginLeft: '10px' }}>
-                        SignUp
-                    </button>
+            <div className="page-container">
+                <div className="profile-container">
+                    <h1 className="profile-name">Login</h1>
+                    <form onSubmit={handleLogin} className="profile-section">
+                        <div className="profile-item">
+                            <label htmlFor="email">Email:</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder='Enter your email'
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)} 
+                                required 
+                            />
+                        </div>
+                        <div className="profile-item">
+                            <label htmlFor="password">Password:</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder='Enter your password'
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                required 
+                            />
+                        </div>
+                        <button type="submit" className="profile-item">Login</button>
+                    </form>
+
+                    <div className="profile-section">
+                        <p>Don't have an account?</p>
+                        <button onClick={handleSignupClick} className="profile-item">
+                            Sign Up
+                        </button>
+                    </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
