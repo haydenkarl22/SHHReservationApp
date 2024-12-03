@@ -1,4 +1,4 @@
-name: Firebase User Tests
+name: React App and Firebase Tests
 
 on:
   push:
@@ -21,11 +21,10 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Nav to frontend
-      run: cd frontend
-
-    - name: Install dependencies
-      run: npm install
+    - name: Install React dependencies
+      run: |
+        cd frontend # Replace 'frontend' with the folder containing package.json
+        npm install
 
     - name: Setup Firebase Admin SDK
       env:
