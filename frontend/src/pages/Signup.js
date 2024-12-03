@@ -15,7 +15,7 @@ function Signup() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            console.log("User created in Firebase Auth:", user);
+            alert("User created in Firebase Auth:", user);
 
             await addDoc(collection(db, 'users'), {
                 uid: user.uid,
