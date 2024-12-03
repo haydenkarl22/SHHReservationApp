@@ -1,4 +1,4 @@
-name: Firebase User Tests
+name: React App and Firebase Tests
 
 on:
   push:
@@ -21,11 +21,10 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Nav to frontend
-      run: cd frontend
-
-    - name: Install dependencies
-      run: npm install
+    - name: Install React dependencies
+      run: |
+        cd frontend
+        npm install
 
     - name: Setup Firebase Admin SDK
       env:
@@ -35,7 +34,7 @@ jobs:
         export GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json
 
     - name: Run user creation test
-      run: node testFirebaseCreateUser.js
+      run: node frontend/tests/testFirebaseCreateUser.js
 
     - name: Run user deletion test
-      run: node testFirebaseDeleteUser.js
+      run: node frontend/tests/testFirebaseDeleteUser.js
