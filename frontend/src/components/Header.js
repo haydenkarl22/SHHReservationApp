@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { auth } from '../firebase';
 import '../styles.css';
 
-
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const cleanup = auth.onAuthStateChanged((user) => {
@@ -14,9 +14,6 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
     return () => cleanup();
   }, []);
 
-
-
-function Header() {
   return (
     <header className="header">
       <nav>
