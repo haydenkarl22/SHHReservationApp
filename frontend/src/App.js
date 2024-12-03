@@ -8,6 +8,7 @@ import Menu from './pages/Menu';
 import About from './pages/About';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Header from './components/Header'
 
 import './styles.css';
 
@@ -15,16 +16,7 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/booking">Booking</Link></li>
-            <li><Link to="/menu">Menu</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
-          </ul>
-        </nav>
+        <Header /> {}
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -36,7 +28,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
-
 
     </Router>
   );

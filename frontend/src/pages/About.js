@@ -7,7 +7,7 @@ import logo from '../img/SHHRestaurantLogo.jpg'
 function About() {
   return (
     <div className="page-wrapper">
-      <Header />
+      
       <div className="about-container">
         <div className="logo-container">
           <img src={logo} alt="La Dolce Vita Logo" className="restaurant-logo" />

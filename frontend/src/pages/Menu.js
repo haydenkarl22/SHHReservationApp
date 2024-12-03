@@ -1,12 +1,10 @@
 // src/pages/Menu.js
 import React from 'react';
-import Header from '../components/Header';
 import '../styles.css';
 
 function Menu() {
   return (
     <div className="page-wrapper">
-      <Header />
       <div className="menu-container">
         <h1 className="restaurant-name">La Dolce Vita</h1>
 

@@ -10,7 +10,6 @@ import {
   serverTimestamp 
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth'; // Install this package
-import Header from '../components/Header';
 import { 
   Container,
   Paper,
@@ -167,7 +166,7 @@ function Booking() {
   }
   return (
     <div className="page-wrapper">
-      <Header />
+      
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Typography variant="h3" component="h1" gutterBottom align="center">
           Make a Reservation
