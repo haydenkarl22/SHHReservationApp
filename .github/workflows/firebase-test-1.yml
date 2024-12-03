@@ -1,0 +1,35 @@
+name: Firebase User Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Setup Firebase Admin SDK
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      run: |
+        echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > firebase-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json
+
+    - name: Run user creation test
+      run: node testFirebaseCreateUser.js
