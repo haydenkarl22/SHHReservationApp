@@ -32,7 +32,7 @@ jobs:
         export GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json
 
     - name: Run user creation test
-      run: node testFirebaseCreateUser
+      run: node testFirebaseCreateUser.js
 
     - name: Run user deletion test
-      run: node testFirebaseDeleteUser
+      run: node testFirebaseDeleteUser.js
