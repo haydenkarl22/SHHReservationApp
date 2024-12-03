@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../styles.css';
+import restaurantLogo from '../img/SHHRestaurantLogo.jpg';
+import food1 from '../img/food1.jpg';
+import food2 from '../img/food2.jpg';
+import food3 from '../img/food3.jpg';
+import food4 from '../img/food4.jpg';
+import food5 from '../img/food5.jpg';
+import food6 from '../img/food6.jpg';
 
 
 // Historical data of average customers by day and hour
@@ -36,41 +43,96 @@ const calculateWaitTime = (day, hour) => {
   };
 };
 
-
-
 function Home() {
-  
   const [waitTime, setWaitTime] = useState(null);
+  const [displayTime, setDisplayTime] = useState(0);
 
+  // First useEffect to calculate the actual wait time
   useEffect(() => {
-      const updateWaitTime = () => {
-          const now = new Date();
-          const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-          const currentHour = now.getHours().toString();
-          const result = calculateWaitTime(currentDay, currentHour);
-          setWaitTime(result);
-      };
+    const now = new Date();
+    const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+    const currentHour = now.getHours().toString();
+    const result = calculateWaitTime(currentDay, currentHour);
+    setWaitTime(result);
+    
+    // Reset display time whenever wait time updates
+    setDisplayTime(0);
+  }, []);
 
-      updateWaitTime();
-      const interval = setInterval(updateWaitTime, 60000);
-      return () => clearInterval(interval);
+  // Second useEffect to handle the animation
+  useEffect(() => {
+    if (waitTime?.isOpen && waitTime.estimatedWait > 0) {
+      const targetValue = waitTime.estimatedWait;
+      const duration = 1500; // Animation duration in milliseconds
+      const frameRate = 30; // Updates per second
+      const totalFrames = duration * (frameRate / 1000);
+      const increment = targetValue / totalFrames;
+      
+      let frame = 0;
+      const timer = setInterval(() => {
+        frame++;
+        setDisplayTime(prev => {
+          const newValue = Math.min(Math.round(increment * frame), targetValue);
+          if (newValue >= targetValue) {
+            clearInterval(timer);
+          }
+          return newValue;
+        });
+      }, 1000 / frameRate);
+
+      return () => clearInterval(timer);
+    }
+  }, [waitTime]);
+
+  // Third useEffect for periodic updates (every minute)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+      const currentHour = now.getHours().toString();
+      const result = calculateWaitTime(currentDay, currentHour);
+      setWaitTime(result);
+      setDisplayTime(0); // Reset display time for new animation
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
-      <div className="page-wrapper">
-          <div className="page-container">
-              <h1>HOME</h1>
-              <div className="wait-time-info">
-                  {waitTime && (
-                      <h2>
-                          {waitTime.isOpen
-                              ? `Current Wait: ${waitTime.estimatedWait} minutes`
-                              : "Currently Closed"}
-                      </h2>
-                  )}
-              </div>
-          </div>
+    <div className="home-container">
+      <div className="logo-section">
+        <img 
+          src={restaurantLogo} 
+          alt="SHH Restaurant Logo" 
+          className="restaurant-logo"
+        />
       </div>
+      
+      <h1 className="home-title">HOME</h1>
+
+      <div className="wait-time-info">
+        {waitTime && (
+          <h2>
+            {waitTime.isOpen
+              ? `Current Wait: ${displayTime} minutes`
+              : "Currently Closed"}
+          </h2>
+        )}
+      </div>
+
+      <div className="food-gallery">
+        <h2 className="gallery-title">Our Signature Dishes</h2>
+        <div className="photo-grid">
+          {/* Replace these with your actual image paths */}
+          <img src={food1} alt="food1" className="food-photo" width="350" height="350" />
+          <img src={food2} alt="food2" className="food-photo" width="350" height="350" />
+          <img src={food3} alt="food3" className="food-photo" width="350" height="350" />
+          <img src={food4} alt="food4" className="food-photo" width="350" height="350" />
+          <img src={food5} alt="food5" className="food-photo" width="350" height="350" />
+          <img src={food6} alt="food6" className="food-photo" width="350" height="350" />
+        </div>
+      </div>
+    </div>
   );
 }
 

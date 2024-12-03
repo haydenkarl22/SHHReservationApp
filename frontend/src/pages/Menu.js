@@ -3,6 +3,18 @@ import React from 'react';
 import '../styles.css';
 
 function Menu() {
+
+  // Function to handle smooth scrolling
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100; 
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+
   return (
     <div className="page-wrapper">
       <div className="menu-container">
@@ -10,7 +22,7 @@ function Menu() {
 
         <div className="menu-columns">
           <div className="menu-column">
-            <section className="menu-section">
+            <section id="antipasti" className="menu-section">
               <h2 className="section-header">ANTIPASTI</h2>
               <p className="section-subtitle">Appetizers</p>
 
@@ -40,7 +52,7 @@ function Menu() {
 
             </section>
 
-            <section className="menu-section">
+            <section id="zuppe" className="menu-section">
               <h2 className="section-header">ZUPPE E INSALATE</h2>
               <p className="section-subtitle">Soups & Salads</p>
 
@@ -70,7 +82,7 @@ function Menu() {
 
             </section>
 
-            <section className="menu-section">
+            <section id="pasta" className="menu-section">
               <h2 className="section-header">PASTA</h2>
               
               <div className="menu-item">
@@ -107,7 +119,7 @@ function Menu() {
           </div>
 
           <div className="menu-column">
-            <section className="menu-section">
+          <section id="pizza" className="menu-section">
               <h2 className="section-header">PIZZA</h2>
               <p className="section-subtitle">Wood-Fired</p>
 
@@ -137,7 +149,7 @@ function Menu() {
 
             </section>
 
-            <section className="menu-section">
+            <section id="secondi" className="menu-section">
               <h2 className="section-header">SECONDI</h2>
               <p className="section-subtitle">Main Courses</p>
 
@@ -167,7 +179,7 @@ function Menu() {
 
             </section>
 
-            <section className="menu-section">
+            <section id="dolci" className="menu-section">
               <h2 className="section-header">DOLCI</h2>
               <p className="section-subtitle">Desserts</p>
 
@@ -197,7 +209,7 @@ function Menu() {
 
             </section>
 
-            <section className="menu-section">
+            <section id="bevande" className="menu-section">
               <h2 className="section-header">BEVANDE</h2>
               <p className="section-subtitle">Beverages</p>
 
@@ -230,6 +242,20 @@ function Menu() {
           </div>
         </div>
       </div>
+
+      <footer className="menu-footer">
+        <nav className="menu-nav">
+          <ul>
+            <li><button onClick={() => scrollToSection('antipasti')}>Antipasti</button></li>
+            <li><button onClick={() => scrollToSection('zuppe')}>Zuppe e Insalate</button></li>
+            <li><button onClick={() => scrollToSection('pasta')}>Pasta</button></li>
+            <li><button onClick={() => scrollToSection('pizza')}>Pizza</button></li>
+            <li><button onClick={() => scrollToSection('secondi')}>Secondi</button></li>
+            <li><button onClick={() => scrollToSection('dolci')}>Dolci</button></li>
+            <li><button onClick={() => scrollToSection('bevande')}>Bevande</button></li>
+          </ul>
+        </nav>
+      </footer>
     </div>
   );
 }
