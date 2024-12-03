@@ -1,9 +1,11 @@
-// createUserTest.js
-const { initializeApp } = require('firebase-admin/app');
+const { initializeApp, applicationDefault } = require('firebase-admin/app');
 const { getAuth } = require('firebase-admin/auth');
 
-// Initialize Firebase Admin SDK
-initializeApp();
+// Initialize Firebase Admin SDK with default credentials
+initializeApp({
+  credential: applicationDefault(),
+  projectId: 'sshreservationapp-3300',
+});
 
 async function testCreateUser() {
   const email = `user@example.com`;
@@ -18,7 +20,6 @@ async function testCreateUser() {
     });
 
     console.log('User created successfully:', userRecord.uid);
-
     process.exit(0);
   } catch (error) {
     console.error('Error during test:', error);
