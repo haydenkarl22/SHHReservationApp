@@ -1,8 +1,6 @@
-%% Overall System
+flowchart TD
     A[SHH Restaurant Website] --> B[Frontend React App]
     A --> D[Firebase Database]
-
-%% Frontend Breakdown
     B --> B1[UI Components]
     B1 --> B1a[Home Page]
     B1a --> B2a[Wait time calculations]
@@ -14,8 +12,6 @@
     B1e --> D1[User Data Collection]
     B1 --> B1f[Job Application Page]
     B1f --> D4[Job Applications Collection]
-
-%% Firebase Breakdown
     D --> D1[User Data Collection]
     D --> D2[Reservations Collection]
     D --> D4[Job Applications Collection]
