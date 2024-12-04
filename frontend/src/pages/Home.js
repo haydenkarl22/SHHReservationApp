@@ -108,7 +108,7 @@ function Home() {
         />
       </div>
       
-      <h1 className="home-title">HOME</h1>
+      <h1 className="home-title">HOOOOOOOOOOME</h1>
 
       <div className="wait-time-info">
         {waitTime && (
